@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() {
         setSize(800, 600);
@@ -91,19 +92,18 @@ public class TankFrame extends Frame {
                 myTank.setMoving(false);
             } else {
                 myTank.setMoving(true);
+                if (bL) myTank.setDir(Dir.LEFT);
+                if (bR) myTank.setDir(Dir.RIGHT);
+                if (bU) myTank.setDir(Dir.UP);
+                if (bD) myTank.setDir(Dir.DOWN);
             }
-            if (bL) myTank.setDir(Dir.LEFT);
-            if (bR) myTank.setDir(Dir.RIGHT);
-            if (bU) myTank.setDir(Dir.UP);
-            if (bD) myTank.setDir(Dir.DOWN);
-
-
         }
     }
 
     @Override
     public void paint(Graphics graphics) {
         myTank.paint(graphics);
+        bullet.paint(graphics);
     }
 
 }

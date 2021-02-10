@@ -2,11 +2,14 @@ package com.madf.tank;
 
 import java.awt.*;
 
+/**
+ * 坦克
+ */
 public class Tank {
 
     private int x, y;
     private Dir dir = Dir.DOWN;
-    private static final int SPEED = 10;
+    private static final int SPEED = 5;
 
     private boolean moving = false;
 
