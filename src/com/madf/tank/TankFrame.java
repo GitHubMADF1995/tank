@@ -10,9 +10,11 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN);
     Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+    static final int GAME_WIDTH = 800;
+    static final int GAME_HEIGHT = 600;
 
     public TankFrame() {
-        setSize(800, 600);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
         setTitle("tank war");
         setVisible(true);
@@ -98,6 +100,22 @@ public class TankFrame extends Frame {
                 if (bD) myTank.setDir(Dir.DOWN);
             }
         }
+    }
+
+    //用双缓冲解决闪烁问题
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics graphics) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color color = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(color);
+        paint(gOffScreen);
+        graphics.drawImage(offScreenImage, 0, 0, null);
     }
 
     @Override

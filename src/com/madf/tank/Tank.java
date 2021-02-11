@@ -21,7 +21,10 @@ public class Tank {
 
     //画笔对象
     public void paint(Graphics graphics) {
+        Color color = graphics.getColor();
+        graphics.setColor(Color.YELLOW);
         graphics.fillRect(x, y, 50, 50);
+        graphics.setColor(color);
 
         move();
     }
