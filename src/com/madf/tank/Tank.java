@@ -23,12 +23,19 @@ public class Tank {
 
     private TankFrame tankFrame = null;
 
+    Rectangle rect = new Rectangle();
+
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     //画笔对象
@@ -74,6 +81,10 @@ public class Tank {
         if (this.group == Group.BAD && random.nextInt(100) > 95) randomDir();
 
         boundsCheck();
+
+        //更新rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundsCheck() {
