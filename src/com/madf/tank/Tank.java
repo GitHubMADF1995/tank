@@ -24,11 +24,20 @@ public class Tank {
 
     //画笔对象
     public void paint(Graphics graphics) {
-        Color color = graphics.getColor();
-        graphics.setColor(Color.YELLOW);
-        graphics.fillRect(x, y, 50, 50);
-        graphics.setColor(color);
-
+        switch (dir) {
+            case LEFT:
+                graphics.drawImage(ResourceMgr.tankL, x, y, null);
+                break;
+            case RIGHT:
+                graphics.drawImage(ResourceMgr.tankR, x, y, null);
+                break;
+            case UP:
+                graphics.drawImage(ResourceMgr.tankU, x, y, null);
+                break;
+            case DOWN:
+                graphics.drawImage(ResourceMgr.tankD, x, y, null);
+                break;
+        }
         move();
     }
 
