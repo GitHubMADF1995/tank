@@ -15,6 +15,7 @@ public class Tank {
     public static int HEIGHT = ResourceMgr.tankD.getHeight();
 
     private boolean moving = false;
+    private boolean living = true;
 
     private TankFrame tankFrame = null;
 
@@ -27,6 +28,8 @@ public class Tank {
 
     //画笔对象
     public void paint(Graphics graphics) {
+        if (!living) tankFrame.enemyTanks.remove(this);
+
         switch (dir) {
             case LEFT:
                 graphics.drawImage(ResourceMgr.tankL, x, y, null);
@@ -103,5 +106,9 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         tankFrame.bullets.add(new Bullet(bX, bY, this.dir, this.tankFrame));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }
