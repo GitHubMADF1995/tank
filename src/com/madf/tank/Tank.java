@@ -1,6 +1,7 @@
 package com.madf.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 坦克
@@ -14,15 +15,19 @@ public class Tank {
     public static int WIDTH = ResourceMgr.tankD.getWidth();
     public static int HEIGHT = ResourceMgr.tankD.getHeight();
 
-    private boolean moving = false;
+    private boolean moving = true;
     private boolean living = true;
+    private Group group = Group.BAD;
+
+    private Random random = new Random();
 
     private TankFrame tankFrame = null;
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -64,6 +69,8 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+        if (random.nextInt(10) > 8) this.fire();
     }
 
     public int getX() {
@@ -102,10 +109,18 @@ public class Tank {
         this.moving = moving;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     public void fire() {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankFrame.bullets.add(new Bullet(bX, bY, this.dir, this.tankFrame));
+        tankFrame.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tankFrame));
     }
 
     public void die() {
