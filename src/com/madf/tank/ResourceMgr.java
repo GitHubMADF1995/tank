@@ -8,6 +8,11 @@ import java.io.IOException;
  * 资源管理加载类
  */
 public class ResourceMgr {
+    private static final ResourceMgr INSTANCE;
+    private ResourceMgr() {}
+    public static ResourceMgr getInstance() {
+        return INSTANCE;
+    }
 
     public static BufferedImage goodTankL, goodTankR, goodTankU, goodTankD;
     public static BufferedImage badTankL, badTankR, badTankU, badTankD;
@@ -16,6 +21,7 @@ public class ResourceMgr {
     public static BufferedImage[] explodes = new BufferedImage[16];
 
     static {
+        INSTANCE = new ResourceMgr();
         try {
             //坦克
 //            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
