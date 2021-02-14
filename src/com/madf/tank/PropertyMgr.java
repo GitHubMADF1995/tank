@@ -23,6 +23,14 @@ public class PropertyMgr {
         return props.get(key);
     }
 
+    public static Integer getInt(String key) {
+        return get(key) == null ? 0 : Integer.parseInt((String) get(key));
+    }
+
+    public static String getString(String key) {
+        return get(key) == null ? "" : (String) get(key);
+    }
+
     public static void main(String[] args) {
         System.out.println(PropertyMgr.get("initTankCount"));
     }
