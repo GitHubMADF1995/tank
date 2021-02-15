@@ -18,7 +18,7 @@ public class Audio {
 	public void loop() {
 		try {
 
-			while (true) {
+//			while (true) {
 				int len = 0;
 				sourceDataLine.open(audioFormat, 1024 * 1024 * 15);
 				sourceDataLine.start();
@@ -31,7 +31,7 @@ public class Audio {
 
 				sourceDataLine.drain();
 				sourceDataLine.close();
-			}
+//			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

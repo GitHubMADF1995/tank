@@ -8,8 +8,8 @@ import java.util.Random;
  */
 public class Tank {
 
-    private int x, y;
-    private Dir dir = Dir.DOWN;
+    int x, y;
+    Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
 
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -17,13 +17,15 @@ public class Tank {
 
     private boolean moving = true;
     private boolean living = true;
-    private Group group = Group.BAD;
+    Group group = Group.BAD;
 
     private Random random = new Random();
 
-    private TankFrame tankFrame = null;
+    TankFrame tankFrame = null;
 
     Rectangle rect = new Rectangle();
+
+    FireStrategy fireStrategy;
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
@@ -36,6 +38,23 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        //坦克开火策略，根据配置文件来
+        if (group == Group.GOOD) {
+            String goodFsName = PropertyMgr.getString("goodFs");
+            try {
+                fireStrategy = (FireStrategy) Class.forName(goodFsName).newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            String badFsName = PropertyMgr.getString("badFs");
+            try {
+                fireStrategy = (FireStrategy) Class.forName(badFsName).newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //画笔对象
@@ -143,9 +162,7 @@ public class Tank {
     }
 
     public void fire() {
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankFrame.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tankFrame));
+        fireStrategy.fire(this);
     }
 
     public void die() {
