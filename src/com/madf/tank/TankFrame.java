@@ -1,5 +1,7 @@
 package com.madf.tank;
 
+import com.madf.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,12 +13,19 @@ import java.util.List;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> enemyTanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
 
-    static final int GAME_WIDTH = 800;
-    static final int GAME_HEIGHT = 600;
+//    List<Tank> enemyTanks = new ArrayList<>();
+//    List<Explode> explodes = new ArrayList<>();
+//    List<Bullet> bullets = new ArrayList<>();
+    //改为使用抽象工厂
+    public List<Tank> enemyTanks = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
+    public List<BaseBullet> bullets = new ArrayList<>();
+
+    GameFactory gameFactory = new DefaultFactory();
+
+    public static final int GAME_WIDTH = 1080;
+    public static final int GAME_HEIGHT = 960;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);

@@ -1,11 +1,14 @@
 package com.madf.tank;
 
+import com.madf.abstractfactory.BaseBullet;
+import com.madf.abstractfactory.BaseTank;
+
 import java.awt.*;
 
 /**
  * 子弹
  */
-public class Bullet {
+public class Bullet extends BaseBullet {
 
     private static final int SPEED = 10;
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -45,6 +48,7 @@ public class Bullet {
         this.group = group;
     }
 
+    @Override
     public void paint(Graphics graphics) {
         if (!living) {
             tankFrame.bullets.remove(this);
@@ -90,6 +94,7 @@ public class Bullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
+    @Override
     public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
 
@@ -101,7 +106,9 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tankFrame.explodes.add(new Explode(eX, eY, tankFrame));
+//            tankFrame.explodes.add(new Explode(eX, eY, tankFrame));
+            //改为使用抽象工厂
+            tankFrame.explodes.add(tankFrame.gameFactory.createExplode(eX, eY, tankFrame));
         }
     }
 

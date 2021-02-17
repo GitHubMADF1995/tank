@@ -1,12 +1,14 @@
 package com.madf.tank;
 
+import com.madf.abstractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
 /**
  * 坦克
  */
-public class Tank {
+public class Tank extends BaseTank {
 
     int x, y;
     Dir dir = Dir.DOWN;
@@ -58,6 +60,7 @@ public class Tank {
     }
 
     //画笔对象
+    @Override
     public void paint(Graphics graphics) {
         if (!living) tankFrame.enemyTanks.remove(this);
 
