@@ -21,18 +21,18 @@ public class Tank {
 
     private Random random = new Random();
 
-    TankFrame tankFrame = null;
+    GameModel gameModel;
 
     Rectangle rect = new Rectangle();
 
     FireStrategy fireStrategy;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gameModel) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gameModel = gameModel;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -59,7 +59,7 @@ public class Tank {
 
     //画笔对象
     public void paint(Graphics graphics) {
-        if (!living) tankFrame.enemyTanks.remove(this);
+        if (!living) gameModel.enemyTanks.remove(this);
 
         switch (dir) {
             case LEFT:

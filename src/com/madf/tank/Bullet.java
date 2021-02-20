@@ -16,25 +16,25 @@ public class Bullet {
 
     private boolean living = true;
 
-    TankFrame tankFrame = null;
+    GameModel gameModel = null;
 
     private Group group = Group.BAD;
 
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gameModel) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gameModel = gameModel;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tankFrame.bullets.add(this);
+        gameModel.bullets.add(this);
     }
 
     public Group getGroup() {
@@ -47,7 +47,7 @@ public class Bullet {
 
     public void paint(Graphics graphics) {
         if (!living) {
-            tankFrame.bullets.remove(this);
+            gameModel.bullets.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -101,7 +101,7 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tankFrame.explodes.add(new Explode(eX, eY, tankFrame));
+            gameModel.explodes.add(new Explode(eX, eY, gameModel));
         }
     }
 
