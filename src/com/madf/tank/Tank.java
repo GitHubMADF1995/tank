@@ -1,15 +1,17 @@
 package com.madf.tank;
 
+import com.madf.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
 /**
  * 坦克
  */
-public class Tank {
+public class Tank extends GameObject {
 
-    int x, y;
-    Dir dir = Dir.DOWN;
+    public int x, y;
+    public Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
 
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -17,13 +19,13 @@ public class Tank {
 
     private boolean moving = true;
     private boolean living = true;
-    Group group = Group.BAD;
+    public Group group = Group.BAD;
 
     private Random random = new Random();
 
-    GameModel gameModel;
+    public GameModel gameModel;
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     FireStrategy fireStrategy;
 
@@ -59,7 +61,7 @@ public class Tank {
 
     //画笔对象
     public void paint(Graphics graphics) {
-        if (!living) gameModel.enemyTanks.remove(this);
+        if (!living) gameModel.removeGameObject(this);
 
         switch (dir) {
             case LEFT:

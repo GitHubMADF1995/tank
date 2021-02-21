@@ -1,4 +1,6 @@
-package com.madf.tank;
+package com.madf.tank.strategy;
+
+import com.madf.tank.Tank;
 
 /**
  * 开火的策略接口

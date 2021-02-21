@@ -1,4 +1,6 @@
-package com.madf.tank;
+package com.madf.tank.strategy;
+
+import com.madf.tank.*;
 
 /**
  * 朝四个方向开火的策略

@@ -1,4 +1,9 @@
-package com.madf.tank;
+package com.madf.tank.strategy;
+
+import com.madf.tank.Audio;
+import com.madf.tank.Bullet;
+import com.madf.tank.Group;
+import com.madf.tank.Tank;
 
 /**
  * 默认开火策略方式

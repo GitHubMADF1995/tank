@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * 子弹
  */
-public class Bullet {
+public class Bullet extends GameObject {
 
     private static final int SPEED = 10;
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -34,7 +34,7 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gameModel.bullets.add(this);
+        gameModel.addGameObject(this);
     }
 
     public Group getGroup() {
@@ -47,7 +47,7 @@ public class Bullet {
 
     public void paint(Graphics graphics) {
         if (!living) {
-            gameModel.bullets.remove(this);
+            gameModel.removeGameObject(this);
         }
         switch (dir) {
             case LEFT:
@@ -90,8 +90,8 @@ public class Bullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank tank) {
-        if (this.group == tank.getGroup()) return;
+    public boolean collideWith(Tank tank) {
+        if (this.group == tank.getGroup()) return false;
 
         //TODO： 用一个rect来记录子弹的位置
 //        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
@@ -101,8 +101,11 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gameModel.explodes.add(new Explode(eX, eY, gameModel));
+            gameModel.addGameObject(new Explode(eX, eY, gameModel));
+            return true;
         }
+
+        return false;
     }
 
     private void die() {
