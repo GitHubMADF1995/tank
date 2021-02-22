@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class GameModel {
 
+    private static final GameModel INSTANCE = new GameModel();
+
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
 //    java.util.List<Bullet> bullets = new ArrayList<>();
 //    java.util.List<Tank> enemyTanks = new ArrayList<>();
@@ -23,7 +25,11 @@ public class GameModel {
 //    Collider collider = new BulletTankCollider();
     ColliderChain colliderChain = new ColliderChain();
 
-    public GameModel() {
+    public static GameModel getInstance() {
+        return INSTANCE;
+    }
+
+    private GameModel() {
         int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
 
         //初始化敌方坦克
