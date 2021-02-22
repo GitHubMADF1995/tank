@@ -30,6 +30,12 @@ public class GameModel {
         for (int i = 0; i < initTankCount; i++) {
             addGameObject(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, this));
         }
+
+        //初始化墙
+        addGameObject(new Wall(150, 150, 200, 50));
+        addGameObject(new Wall(550, 150, 200, 50));
+        addGameObject(new Wall(300, 300, 50, 200));
+        addGameObject(new Wall(500, 300, 50, 200));
     }
 
     public void addGameObject(GameObject gameObject) {

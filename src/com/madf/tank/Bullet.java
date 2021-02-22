@@ -20,7 +20,7 @@ public class Bullet extends GameObject {
 
     private Group group = Group.BAD;
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, Group group, GameModel gameModel) {
         this.x = x;
@@ -108,7 +108,7 @@ public class Bullet extends GameObject {
         return false;
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }
