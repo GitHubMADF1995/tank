@@ -1,6 +1,7 @@
 package com.madf.tank.strategy;
 
 import com.madf.tank.*;
+import com.madf.tank.decorator.RectDecorator;
 
 /**
  * 朝四个方向开火的策略

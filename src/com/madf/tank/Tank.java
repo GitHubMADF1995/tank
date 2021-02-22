@@ -10,7 +10,6 @@ import java.util.Random;
  */
 public class Tank extends GameObject {
 
-    public int x, y;
     int oldX, oldY;
     public Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
@@ -178,5 +177,15 @@ public class Tank extends GameObject {
 
     public void die() {
         this.living = false;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }
