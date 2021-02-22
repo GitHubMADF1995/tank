@@ -11,6 +11,7 @@ import java.util.Random;
 public class Tank extends GameObject {
 
     public int x, y;
+    int oldX, oldY;
     public Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
 
@@ -80,7 +81,16 @@ public class Tank extends GameObject {
         move();
     }
 
+    public void back() {
+        x = oldX;
+        y = oldY;
+    }
+
     public void move() {
+        //记录移动之前的位置
+        oldX = x;
+        oldY = y;
+
         if (!moving) return;
 
         switch (dir) {

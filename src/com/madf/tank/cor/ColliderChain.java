@@ -15,13 +15,14 @@ public class ColliderChain implements Collider {
     public ColliderChain() {
         add(new BulletTankCollider());
         //也可以增加其他的碰撞类
-//        new TankTankCollider();
+        add(new TankTankCollider());
     }
 
     public void add(Collider c) {
         colliders.add(c);
     }
 
+    @Override
     public boolean collide(GameObject o1, GameObject o2) {
         for (int i = 0; i < colliders.size(); i++) {
             if (!colliders.get(i).collide(o1, o2)) return false;
