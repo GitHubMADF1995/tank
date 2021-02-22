@@ -16,7 +16,7 @@ public class Bullet extends GameObject {
 
     private boolean living = true;
 
-    GameModel gameModel = null;
+    public GameModel gameModel = null;
 
     private Group group = Group.BAD;
 
@@ -88,24 +88,6 @@ public class Bullet extends GameObject {
         rect.y = this.y;
 
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
-    }
-
-    public boolean collideWith(Tank tank) {
-        if (this.group == tank.getGroup()) return false;
-
-        //TODO： 用一个rect来记录子弹的位置
-//        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-//        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (rect.intersects(tank.rect)) {
-            tank.die();
-            this.die();
-            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gameModel.addGameObject(new Explode(eX, eY, gameModel));
-            return true;
-        }
-
-        return false;
     }
 
     public void die() {
