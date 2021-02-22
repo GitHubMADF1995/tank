@@ -15,33 +15,41 @@ public class GameModel {
 
     private static final GameModel INSTANCE = new GameModel();
 
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
+    Tank myTank;
 //    java.util.List<Bullet> bullets = new ArrayList<>();
 //    java.util.List<Tank> enemyTanks = new ArrayList<>();
 //    List<Explode> explodes = new ArrayList<>();
 
     List<GameObject> gameObjects = new ArrayList<>();
 
-//    Collider collider = new BulletTankCollider();
+    //    Collider collider = new BulletTankCollider();
     ColliderChain colliderChain = new ColliderChain();
 
     public static GameModel getInstance() {
         return INSTANCE;
     }
 
+    static {
+        INSTANCE.init();
+    }
+
     private GameModel() {
-        int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
-
-        //初始化敌方坦克
-        for (int i = 0; i < initTankCount; i++) {
-            addGameObject(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, this));
-        }
-
         //初始化墙
         addGameObject(new Wall(150, 150, 200, 50));
         addGameObject(new Wall(550, 150, 200, 50));
         addGameObject(new Wall(300, 300, 50, 200));
         addGameObject(new Wall(500, 300, 50, 200));
+    }
+
+    private void init() {
+        //初始化主战坦克
+        myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD);
+        int initTankCount = Integer.parseInt((String) PropertyMgr.get("initTankCount"));
+
+        //初始化敌方坦克
+        for (int i = 0; i < initTankCount; i++) {
+            new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
+        }
     }
 
     public void addGameObject(GameObject gameObject) {

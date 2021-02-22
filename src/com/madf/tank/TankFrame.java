@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    GameModel gameModel = new GameModel();
+    GameModel gameModel = GameModel.getInstance();
 
     static final int GAME_WIDTH = 1080;
     static final int GAME_HEIGHT = 960;

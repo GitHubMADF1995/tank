@@ -24,18 +24,15 @@ public class Tank extends GameObject {
 
     private Random random = new Random();
 
-    public GameModel gameModel;
-
     public Rectangle rect = new Rectangle();
 
     FireStrategy fireStrategy;
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gameModel) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gameModel = gameModel;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -58,11 +55,13 @@ public class Tank extends GameObject {
                 e.printStackTrace();
             }
         }
+
+        GameModel.getInstance().addGameObject(this);
     }
 
     //画笔对象
     public void paint(Graphics graphics) {
-        if (!living) gameModel.removeGameObject(this);
+        if (!living) GameModel.getInstance().removeGameObject(this);
 
         switch (dir) {
             case LEFT:

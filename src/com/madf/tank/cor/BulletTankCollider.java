@@ -1,9 +1,6 @@
 package com.madf.tank.cor;
 
-import com.madf.tank.Bullet;
-import com.madf.tank.Explode;
-import com.madf.tank.GameObject;
-import com.madf.tank.Tank;
+import com.madf.tank.*;
 
 /**
  * 子弹和坦克的相撞
@@ -23,7 +20,7 @@ public class BulletTankCollider implements Collider {
                 bullet.die();
                 int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
                 int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-                bullet.gameModel.addGameObject(new Explode(eX, eY, bullet.gameModel));
+                new Explode(eX, eY);
                 return false;
             }
             return true;

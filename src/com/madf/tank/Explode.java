@@ -13,19 +13,19 @@ public class Explode extends GameObject {
     private int x, y;
 
     private boolean living = true;
-    GameModel gameModel = null;
 
     private int step = 0;
 
-    public Explode(int x, int y, GameModel gameModel) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gameModel = gameModel;
+
+        GameModel.getInstance().addGameObject(this);
     }
 
     public void paint(Graphics graphics) {
         graphics.drawImage(ResourceMgr.explodes[step++], x, y, null);
-        if (step >= ResourceMgr.explodes.length) gameModel.removeGameObject(this);
+        if (step >= ResourceMgr.explodes.length) GameModel.getInstance().removeGameObject(this);
     }
 
 }
