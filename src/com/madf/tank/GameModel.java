@@ -5,6 +5,7 @@ import com.madf.tank.cor.Collider;
 import com.madf.tank.cor.ColliderChain;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,5 +86,27 @@ public class GameModel {
 
     public Tank getMainTank() {
         return myTank;
+    }
+
+    public void save() {
+        File file = new File("D:/Desktop/Tank.data");
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(myTank);
+            oos.writeObject(gameObjects);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load() {
+        File file = new File("D:/Desktop/Tank.data");
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            myTank = (Tank)ois.readObject();
+            gameObjects = (List) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
