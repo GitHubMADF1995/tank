@@ -90,23 +90,39 @@ public class GameModel {
 
     public void save() {
         File file = new File("D:/Desktop/Tank.data");
+        ObjectOutputStream oos = null;
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos = new ObjectOutputStream(new FileOutputStream(file));
             oos.writeObject(myTank);
             oos.writeObject(gameObjects);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     public void load() {
         File file = new File("D:/Desktop/Tank.data");
+        ObjectInputStream ois = null;
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            ois = new ObjectInputStream(new FileInputStream(file));
             myTank = (Tank)ois.readObject();
             gameObjects = (List) ois.readObject();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
