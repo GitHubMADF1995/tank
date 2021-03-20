@@ -1,13 +1,12 @@
-package test;
+package com.madf.test;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * 图片加载测试类

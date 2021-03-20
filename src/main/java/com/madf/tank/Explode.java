@@ -12,20 +12,19 @@ public class Explode {
 
     private int x, y;
 
-    private boolean living = true;
-    TankFrame tankFrame = null;
+//    private boolean living = true;
 
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics graphics) {
         graphics.drawImage(ResourceMgr.explodes[step++], x, y, null);
-        if (step >= ResourceMgr.explodes.length) tankFrame.explodes.remove(this);
+        if (step >= ResourceMgr.explodes.length) TankFrame.INSTANCE.explodes.remove(this);
     }
 
 }
